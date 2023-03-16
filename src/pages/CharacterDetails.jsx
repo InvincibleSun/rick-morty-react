@@ -15,9 +15,9 @@ export default function CharacterDetails(){
 
   return (
     <DetailsStyled>
-      <div>
+      <div className="arrow-back">
         <Link to="/">
-          <img src={Arrow} alt="arrow" />
+          <img src={Arrow} alt="arrow-back" />
           <span>GO BACK</span>
         </Link>
       </div>

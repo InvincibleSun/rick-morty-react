@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
 export const DetailsStyled = styled.div`
-  div {
+  .arrow-back {
     cursor: pointer;
     display: flex;
     align-items: center;
     margin: 20px 0 0 50px;
+    /* position: fixed; */
     span {
       font-family: "Karla", sans-serif;
       font-style: normal;
@@ -39,6 +40,7 @@ export const DetailsStyled = styled.div`
       font-size: 48px;
       line-height: 1.2;
       margin: 0 0 48px 0;
+      text-align: center;
     }
     & > p {
       font-weight: 500;
@@ -59,9 +61,7 @@ export const DetailsStyled = styled.div`
       letter-spacing: 0.15px;
       border-bottom: 1px solid #e3e4e7b2;
       margin-top: 9px;
-      &:nth-child(4) {
-        text-transform: capitalize;
-      }
+      text-transform: capitalize;
       p {
         font-weight: 400;
         font-size: 14px;

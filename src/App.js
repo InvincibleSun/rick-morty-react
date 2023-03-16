@@ -18,7 +18,7 @@ function App() {
         <Route
           index
           element={<Characters />}
-          loader={charactersLoader}
+          // loader={charactersLoader}
           errorElement={<CharactersError />}
         />
         {/* <Route path="/not-found" element={<NotFound />} /> */}
