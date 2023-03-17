@@ -33,4 +33,11 @@ export const CardStyled = styled.div`
     background-color: red;
     cursor: pointer;
   }
+  @media (max-width: 480px) {
+    width: 312px;
+    div > img {
+      height: 232px;
+      width: 312px;
+    }
+  }
 `;

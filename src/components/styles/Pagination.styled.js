@@ -10,7 +10,7 @@ export const PaginationStyled = styled.div`
       background-color: #00b0c8;
       color: #fff;
       cursor: pointer;
-      padding: 10px 20px;
+      padding: 10px 15px;
       border: 1px solid #90a08d;
       border-radius: 3px;
     }

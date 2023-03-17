@@ -9,10 +9,6 @@ import Arrow from "../images/Arrow.svg";
 export default function CharacterDetails(){
   const character = useLoaderData();
 
-  // if(!character) {
-  //   return <Navigate to={'/not-found'} />;
-  // }
-
   return (
     <DetailsStyled>
       <div className="arrow-back">
@@ -61,7 +57,6 @@ export const charactersDetailsLoader = async ({params}) => {
 
   if(!res.ok){
     throw Error("Could not find that character")
-    // return null;
   }
 
   return data;

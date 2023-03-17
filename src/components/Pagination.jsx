@@ -3,8 +3,7 @@ import ReactPaginate from 'react-paginate';
 import { PaginationStyled } from "./styles/Pagination.styled"
 
 
-export default function Pagination({ setPageNumber, fetchInfo }) {
-  console.log(fetchInfo)
+export default function Pagination({ pageNumber, setPageNumber, fetchInfo }) {
   return(
     <PaginationStyled>
         <ReactPaginate 
@@ -16,8 +15,14 @@ export default function Pagination({ setPageNumber, fetchInfo }) {
             nextLabel="Next" 
             previousLabel="Prev"
             activeClassName="active"
+            pageRangeDisplayed="1"
+            marginPagesDisplayed="1"
+            // forcePage={pageNumber === 1 ? 0 : pageNumber}
             onPageChange={(data) => {
-              setPageNumber(data.selected + 1)
+              // localStorage.setItem("pageNumber", pageNumber);
+              localStorage.setItem('pageNumber', data.selected + 1);
+              // setPageNumber(data.selected + 1 || localStorage.getItem('pageNumber'))
+              setPageNumber(data.selected + 1);
             }}
         />
     </PaginationStyled>

@@ -6,7 +6,6 @@ export const DetailsStyled = styled.div`
     display: flex;
     align-items: center;
     margin: 20px 0 0 50px;
-    /* position: fixed; */
     span {
       font-family: "Karla", sans-serif;
       font-style: normal;
@@ -53,6 +52,7 @@ export const DetailsStyled = styled.div`
     ul {
       width: 412px;
       padding: 0 16px 16px;
+      margin-bottom: 85px;
     }
     li {
       font-weight: 700;
@@ -69,6 +69,30 @@ export const DetailsStyled = styled.div`
         letter-spacing: 0.25px;
         color: #6e798c;
         margin-bottom: 12px;
+      }
+    }
+    @media (max-width: 480px) {
+      .arrow-back {
+        margin: 24px 0 0 70px;
+      }
+      div img {
+        height: 150px;
+        width: 150px;
+        margin: 78px 10px 34px;
+      }
+      h1 {
+        font-size: 32px;
+        margin-bottom: 35px;
+      }
+      ul {
+        width: 312px;
+        padding: 0 16px 16px;
+      }
+    }
+    @media (max-width: 368px) {
+      & > p {
+        align-self: flex-start;
+        margin: 0 0 16px 4px;
       }
     }
   }

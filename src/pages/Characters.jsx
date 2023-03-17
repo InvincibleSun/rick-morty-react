@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 //loading
 import { ColorRing } from "react-loader-spinner";
@@ -22,24 +22,52 @@ export default function Characters(){
   
   const [ready, setReady] = useState(false)
   const [input, setInput] = useState(localStorage.getItem('searchInput') || '');
-  const [pageNumber, setPageNumber] = useState(1);
+  const currentPage = localStorage.getItem("pageNumber") ? localStorage.getItem("pageNumber") : 1 ;
+  localStorage.setItem("pageNumber", currentPage );
+  const [pageNumber, setPageNumber] = useState(currentPage);
   const [fetchInfo, setFetchInfo] = useState();
-  const [dataFromInput, setDataFromInput] = useState(null);
-  const dataFromLoader = useLoaderData();
-  const characters = dataFromInput || dataFromLoader;
+  const [characters, setCharacters] = useState(null);
+  
 
-  const search = useCallback(async () => {
+
+  const fetching = useCallback(async () => {
     setReady(false);
     localStorage.setItem('searchInput', input);
+    // localStorage.setItem("pageNumber", pageNumber);
     const data = await fetchData(`https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${input}`);
     setReady(true);
     setFetchInfo(data.info);
-    setDataFromInput(sortData(data.results));
+    setCharacters(sortData(data.results));
   }, [input, pageNumber]);
 
   useEffect(() => {
-    search();
-  }, [search]);
+    fetching();
+  }, [fetching]);
+
+  async function fetchData(url){
+   const res = await fetch(url);
+   const data = await res.json();
+
+   if(!res.ok){
+    throw Error("Could not fetch the characters")
+   }
+
+   return data;
+  }
+
+  function sortData(data){
+    const sortedData = data.sort(function (a, b) {
+        if (a.name < b.name) {
+          return -1;
+        }
+        if (a.name > b.name) {
+          return 1;
+        }
+        return 0;
+    })
+
+    return sortedData;
+  }
 
   return (
     <>
@@ -48,7 +76,7 @@ export default function Characters(){
         <HeaderStyled>
           <img src={Logo} alt="logo" />
           <form>
-            <input onKeyUp={search} onChange={e => setInput(e.target.value)} value={input} type="search" placeholder="Filter by name..." name="character-search" />
+            <input onKeyUp={fetching} onChange={e => setInput(e.target.value)} value={input} type="search" placeholder="Filter by name..." name="character-search" />
           </form>
         </HeaderStyled>
         {ready ? 
@@ -82,51 +110,8 @@ export default function Characters(){
                   ]}
             />
         } 
-        <Pagination setPageNumber={setPageNumber} fetchInfo={fetchInfo} />
+        <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} fetchInfo={fetchInfo} />
       </WrapperStyled>
     </>
   );
-}
-
-//loader
-// export const charactersLoader = async () => {
-//   //  setReady(true)
-//    const data = await fetchData('https://rickandmortyapi.com/api/character');
-
-//    if(!data){
-//     throw Error("Could not fetch the characters")
-//    }
-
-//    return data;
-// }
-
-
-
-function sortData(data){
-  const sortedData = data.sort(function (a, b) {
-      if (a.name < b.name) {
-        return -1;
-      }
-      if (a.name > b.name) {
-        return 1;
-      }
-      return 0;
-  })
-
-  return sortedData;
-}
-
-
-
-
-async function fetchData(url){
-   const res = await fetch(url);
-   const data = await res.json();
-  //  const results = data.results;
-
-   if(!res.ok){
-    throw Error("Error")
-   }
-
-   return data;
 }
