@@ -1,12 +1,10 @@
-import {useLoaderData, Link } from "react-router-dom";
+import { useLoaderData, Link } from "react-router-dom";
 
-import { DetailsStyled } from "../components/styles/Details.styled";
+import { DetailsStyled } from "../styles/Details.styled";
 
 import Arrow from "../images/Arrow.svg";
 
-
-
-export default function CharacterDetails(){
+export default function CharacterDetails() {
   const character = useLoaderData();
 
   return (
@@ -47,17 +45,21 @@ export default function CharacterDetails(){
         </ul>
       </main>
     </DetailsStyled>
-  )
+  );
 }
 
-export const charactersDetailsLoader = async ({params}) => {
-  const {id} = params;
-  const res = await fetch('https://rickandmortyapi.com/api/character/' + id);
-  const data = await res.json();
+export const charactersDetailsLoader = async ({ params }) => {
+  try {
+    const { id } = params;
+    const res = await fetch("https://rickandmortyapi.com/api/character/" + id);
+    const data = await res.json();
 
-  if(!res.ok){
-    throw Error("Could not find that character")
+    if (!res.ok) {
+      throw Error("Could not find that character");
+    }
+
+    return data;
+  } catch (error) {
+    console.log(error);
   }
-
-  return data;
-}
+};

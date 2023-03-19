@@ -27,6 +27,7 @@ export const CardStyled = styled.div`
       line-height: 1.5;
       letter-spacing: 0.25px;
       color: rgba(0, 0, 0, 0.6);
+      text-transform: capitalize;
     }
   }
   a {

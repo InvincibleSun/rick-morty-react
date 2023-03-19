@@ -5,17 +5,27 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 
-//pages
+// farebase
+import Auth from "./pages/Auth";
+
+// pages
 import Characters from "./pages/Characters";
 import CharactersError from "./pages/CharactersError";
-import CharacterDetails, { charactersDetailsLoader } from "./pages/CharacterDetails";
+import CharacterDetails, {
+  charactersDetailsLoader,
+} from "./pages/CharacterDetails";
 import NotFound from "./pages/NotFound";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route index element={<Characters />} errorElement={<CharactersError />} />
+        <Route
+          index
+          element={<Characters />}
+          errorElement={<CharactersError />}
+        />
+        <Route path="/auth" element={<Auth />} />
 
         <Route
           path="/:id"

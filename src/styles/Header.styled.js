@@ -1,8 +1,25 @@
 import styled from "styled-components";
-import Search from "../../images/Search.svg";
+import Search from "../images/Search.svg";
 
 export const HeaderStyled = styled.header`
-  margin: 86px 0 61px;
+  margin: 56px 0 61px;
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    h1 {
+      font-size: 16px;
+      font-weight: 500;
+    }
+    button {
+      background-color: #00b0c8;
+      color: #fff;
+      cursor: pointer;
+      padding: 10px 15px;
+      border: 1px solid #90a08d;
+      border-radius: 3px;
+    }
+  }
   img {
     margin: 0 auto 16px;
     display: block;
@@ -45,6 +62,12 @@ export const HeaderStyled = styled.header`
   }
   @media (max-width: 480px) {
     margin-bottom: 32px;
+    h1 {
+      font-size: 13px;
+    }
+    button {
+      margin-bottom: 30px;
+    }
     img {
       width: 312px;
       margin-bottom: 32px;
